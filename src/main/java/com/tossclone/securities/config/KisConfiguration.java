@@ -1,4 +1,4 @@
-package com.tossclone.securities.confog;
+package com.tossclone.securities.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

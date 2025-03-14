@@ -1,11 +1,16 @@
 package com.tossclone.securities.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import com.tossclone.securities.confog.KisConfiguration;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.tossclone.securities.config.KisConfiguration;
+import com.tossclone.securities.dto.Stock;
 
 import reactor.core.publisher.Mono;
 
@@ -31,7 +36,7 @@ public class KisService {
         return headers;
     }
 
-    public Mono<String> getVolumeRank() {
+    public Mono<List<Stock>> getVolumeRank() {
         String uri = "/uapi/domestic-stock/v1/quotations/volume-rank";
         
         return webClient.get()
@@ -51,7 +56,30 @@ public class KisService {
                         .build())
                 .headers(headers -> headers.addAll(createVolumeRankHttpHeaders()))
                 .retrieve()
-                .bodyToMono(String.class);
+                .bodyToMono(JsonNode.class)
+                .map(this::parseVolumeRankResponse);
+    }
+    
+    private List<Stock> parseVolumeRankResponse(JsonNode response) {
+        List<Stock> stockList = new ArrayList<>();
+        
+        JsonNode dataArray = response.get("output");
+        
+        if (dataArray != null && dataArray.isArray()) {
+            for (JsonNode stockData : dataArray) {
+                Stock stock = new Stock();
+                stock.setCode(stockData.get("mksc_shrn_iscd").asText());
+                stock.setRank(stockData.get("data_rank").asInt()); 
+                stock.setName(stockData.get("hts_kor_isnm").asText()); 
+                stock.setPrice(stockData.get("stck_prpr").asLong());
+                stock.setRate(Math.round(stockData.get("prdy_ctrt").asDouble() * 10.0) / 10.0);
+                stock.setVolume(stockData.get("acml_vol").asLong() / 100); 
+                
+                stockList.add(stock);
+            }
+        }
+        
+        return stockList;
     }
 }
 

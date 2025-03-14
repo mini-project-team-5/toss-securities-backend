@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 
-import com.tossclone.securities.confog.KisConfiguration;
+import com.tossclone.securities.config.KisConfiguration;
 
 @SpringBootApplication
 @PropertySource("classpath:config/secu.properties")
