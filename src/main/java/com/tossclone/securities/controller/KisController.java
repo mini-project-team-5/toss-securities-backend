@@ -14,10 +14,10 @@ import reactor.core.publisher.Mono;
 @RestController
 public class KisController {
 	@Autowired
-    private KisService kisService;
+	private KisService kisService;
 
-    @GetMapping("/volume-rank")
-    public Mono<List<Stock>> getVolumeRank() {
-        return kisService.getVolumeRank();
-    }
+	@GetMapping("/volume-rank")
+	public Mono<List<Stock>> getVolumeRank() {
+		return kisService.getVolumeRank();
+	}
 }
