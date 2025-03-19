@@ -5,9 +5,17 @@
 
 <mapper namespace="com.tossclone.securities.dao.WishDao">
 
-	<insert id="addWish" parameterType="com.tossclone.securities.dto.Wish">
-		INSERT INTO wish (user_id, stock_code)
-		VALUES (#{userId}, #{stockCode})
+	<insert id="addWish"
+		parameterType="com.tossclone.securities.dto.Wish">
+		INSERT INTO wish (user_id, stock_code, stock_name,
+		stock_rank, stock_price, stock_volume, stock_rate)
+		VALUES (#{userId},
+		#{stock.code},
+		#{stock.name},
+		#{stock.rank},
+		#{stock.price},
+		#{stock.volume},
+		#{stock.rate})
 	</insert>
 
 </mapper>

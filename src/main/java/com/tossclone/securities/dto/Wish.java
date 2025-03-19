@@ -1,16 +1,26 @@
 package com.tossclone.securities.dto;
 
 public class Wish {
-	private int userId;
-	private String stockCode;
+	private int wishId, userId;
+	private Stock stock;
 
 	public Wish() {
 		super();
 	}
 
-	public Wish(int userId, String stockCode) {
+	public Wish(int wishId, int userId, Stock stock) {
+		super();
+		this.wishId = wishId;
 		this.userId = userId;
-		this.stockCode = stockCode;
+		this.stock = stock;
+	}
+
+	public int getWishId() {
+		return wishId;
+	}
+
+	public void setWishId(int wishId) {
+		this.wishId = wishId;
 	}
 
 	public int getUserId() {
@@ -21,17 +31,17 @@ public class Wish {
 		this.userId = userId;
 	}
 
-	public String getStockCode() {
-		return stockCode;
+	public Stock getStock() {
+		return stock;
 	}
 
-	public void setStockCode(String stockCode) {
-		this.stockCode = stockCode;
+	public void setStock(Stock stock) {
+		this.stock = stock;
 	}
 
 	@Override
 	public String toString() {
-		return "Wish [userId=" + userId + ", stockCode=" + stockCode + "]";
+		return "Wish [wishId=" + wishId + ", userId=" + userId + ", stock=" + stock + "]";
 	}
 
 }
