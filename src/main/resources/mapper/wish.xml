@@ -18,4 +18,8 @@
 		#{stock.rate})
 	</insert>
 
+	<delete id="deleteWish" parameterType="com.tossclone.securities.dto.Wish">
+		DELETE FROM wish
+		WHERE user_id = #{userId} AND stock_code = #{stockCode}
+	</delete>
 </mapper>

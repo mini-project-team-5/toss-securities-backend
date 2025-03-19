@@ -13,7 +13,11 @@ public class WishService {
 	@Autowired
 	WishDao wishDao;
 	
-	public void addWish(Wish wish) throws SQLException {
+	public void addWish(Wish wish) throws Exception {
 		wishDao.addWish(wish);
+	}
+	
+	public void deleteWish(int userId, String stockCode) throws Exception {
+		wishDao.deleteWish(userId, stockCode);
 	}
 }

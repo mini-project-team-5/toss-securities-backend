@@ -8,5 +8,7 @@ import com.tossclone.securities.dto.Wish;
 
 @Mapper
 public interface WishDao {
-	public void addWish(Wish wish) throws SQLException;
+	public void addWish(Wish wish) throws Exception;
+	
+	public void deleteWish(int userId, String stockCode) throws Exception;
 }
