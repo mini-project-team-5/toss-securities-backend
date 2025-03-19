@@ -1,6 +1,6 @@
 package com.tossclone.securities.service;
 
-import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,12 +12,17 @@ import com.tossclone.securities.dto.Wish;
 public class WishService {
 	@Autowired
 	WishDao wishDao;
-	
+
+	public List<Wish> getWishList(int userId) throws Exception {
+		return wishDao.getWishList(userId);
+	}
+
 	public void addWish(Wish wish) throws Exception {
 		wishDao.addWish(wish);
 	}
-	
+
 	public void deleteWish(int userId, String stockCode) throws Exception {
 		wishDao.deleteWish(userId, stockCode);
 	}
+
 }

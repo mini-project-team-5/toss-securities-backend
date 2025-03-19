@@ -1,8 +1,11 @@
 package com.tossclone.securities.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +19,17 @@ import com.tossclone.securities.service.WishService;
 public class WishController {
 	@Autowired
 	WishService wishService;
+
+	@GetMapping("/wish/{userId}")
+	public List<Wish> getWishList(@PathVariable int userId) {
+		try {
+			return wishService.getWishList(userId);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	@PostMapping("add-wish")
 	public String addWish(@RequestBody Wish wish) {
@@ -39,4 +53,5 @@ public class WishController {
 			return null;
 		}
 	}
+
 }
