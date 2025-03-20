@@ -6,7 +6,7 @@
 <mapper namespace="com.tossclone.securities.dao.MemberDao">
 	<select id="findUserNameByUserId" parameterType="Long"
 		resultType="String">
-		SELECT user_name FROM member WHERE user_id = #{user_id}
+		SELECT user_name FROM members WHERE user_id = #{user_id}
 	</select>
 
 

@@ -15,7 +15,7 @@ public interface MemberDao {
         @Param("phone_number") String phone_number,
         @Param("birth_date") String birth_date
     );
-    
+    @Select("SELECT name FROM members WHERE user_id = #{user_id}")
     public String findUserNameByUserId(Long userId);
 
 }
