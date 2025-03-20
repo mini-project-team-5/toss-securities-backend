@@ -10,4 +10,10 @@ public interface LoginDao {
 
     @Select("SELECT token FROM login_token WHERE user_id = #{user_id}")
     String findTokenByUserId(@Param("user_id") Long user_id);
+    
+    @Delete("DELETE FROM login_token WHERE user_id = #{user_id}")
+    void deleteToken(@Param("user_id") Long user_id);
+    
+    @Delete("DELETE FROM login_token WHERE expire_time <= NOW()")
+    void deleteExpiredTokens();
 }

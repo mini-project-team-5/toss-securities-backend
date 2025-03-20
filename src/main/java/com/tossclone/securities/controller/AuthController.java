@@ -144,6 +144,34 @@ public class AuthController {
             .body(Map.of("message", "로그인 성공!", "token", token, "name", member.getName()));
     }
     
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(@CookieValue(value = "jwt_token", defaultValue = "") String token) {
+        System.out.println("로그아웃 요청 받음 - 토큰: " + token);
+
+        if (token.isEmpty()) {
+            return ResponseEntity.badRequest().body("유효한 로그인 상태가 아닙니다.");
+        }
+
+        Long user_id = jwtUtil.extractUserId(token);
+        if (user_id != null) {
+            authService.deleteToken(user_id);
+        }
+
+        ResponseCookie expiredCookie = ResponseCookie.from("jwt_token", "")
+            .httpOnly(true)
+            .secure(true)
+            .path("/")
+            .maxAge(0)  // 즉시 만료
+            .build();
+
+        System.out.println("로그아웃 완료 - DB 토큰 삭제 및 쿠키 무효화");
+
+        return ResponseEntity.ok()
+            .header(HttpHeaders.SET_COOKIE, expiredCookie.toString())
+            .body("로그아웃 성공!");
+    }
+
+    //토큰 테스트 (지워도 됨)
     @GetMapping("/test-expired-token")
     public ResponseEntity<?> testExpiredToken(@CookieValue(value = "jwt_token", defaultValue = "") String token) {
         System.out.println("[토큰 만료 테스트] 받은 토큰: " + token);
