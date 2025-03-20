@@ -33,14 +33,16 @@ public class WishController {
 
 	@GetMapping("/api/wishlist")
 	public  ResponseEntity<List<Wish>> getWishList(@RequestHeader("Authorization") String authorization) {
+		String token = authorization.substring(7);
 		
 		try {
-			if (authorization == null || !authService.isTokenValid(authorization)) {
+			if (token == null || !authService.isTokenValid(token)) {
 	            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
 	        }
 
 	        // 토큰에서 userId 추출
-	        Long userId = jwtUtil.extractUserId(authorization);
+	        Long userId = jwtUtil.extractUserId(token);
+	       System.out.println(userId);
 	        
 	        return ResponseEntity.ok(wishService.getWishList(userId));
 	    
@@ -52,12 +54,13 @@ public class WishController {
 
 	@PostMapping("/api/wishlist")
 	public ResponseEntity<String> addWish(@RequestHeader("Authorization") String authorization, @RequestBody Wish wish) {
-	    try {
-	        if (authorization == null || !authService.isTokenValid(authorization)) {
+		String token = authorization.substring(7);
+		try {
+	        if (token == null || !authService.isTokenValid(token)) {
 	            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
 	        }
 
-	        Long userId =jwtUtil.extractUserId(authorization);
+	        Long userId =jwtUtil.extractUserId(token);
 	        wish.setUserId(userId); 
 
 	        wishService.addWish(wish);
@@ -71,12 +74,13 @@ public class WishController {
 
 	@DeleteMapping("/api/wishlist/{stockCode}")
 	public ResponseEntity<String> deleteWish(@RequestHeader("Authorization") String authorization, @PathVariable String stockCode) {
-	    try {
-	        if (authorization == null || !authService.isTokenValid(authorization)) {
+		String token = authorization.substring(7);
+		try {
+	        if (token == null || !authService.isTokenValid(token)) {
 	            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
 	        }
 
-	        Long userId =jwtUtil.extractUserId(authorization);
+	        Long userId =jwtUtil.extractUserId(token);
 
 	        wishService.deleteWish(userId, stockCode);
 	        return ResponseEntity.ok("ok");

@@ -169,22 +169,22 @@ public class AuthController {
             .body("로그아웃 성공!");
     }
 
-    //토큰 테스트 (지워도 됨)
-    @GetMapping("/test-expired-token")
-    public ResponseEntity<?> testExpiredToken(@CookieValue(value = "jwt_token", defaultValue = "") String token) {
-        System.out.println("[토큰 만료 테스트] 받은 토큰: " + token);
-
-        if (token == null || token.isEmpty()) {
-            System.out.println(" 토큰이 비어있습니다.");
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(" 토큰이 비어있습니다.");
-        }
-
-        if (!authService.isTokenValid(token)) {
-            System.out.println(" 토큰이 만료되었습니다.");
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(" 토큰이 만료되었습니다.");
-        }
-
-        System.out.println(" 토큰이 아직 유효합니다.");
-        return ResponseEntity.ok("토큰이 아직 유효합니다.");
-    }
+//    //토큰 테스트 (지워도 됨)
+//    @GetMapping("/test-expired-token")
+//    public ResponseEntity<?> testExpiredToken(@CookieValue(value = "jwt_token", defaultValue = "") String token) {
+//        System.out.println("[토큰 만료 테스트] 받은 토큰: " + token);
+//
+//        if (token == null || token.isEmpty()) {
+//            System.out.println(" 토큰이 비어있습니다.");
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(" 토큰이 비어있습니다.");
+//        }
+//
+//        if (!authService.isTokenValid(token)) {
+//            System.out.println(" 토큰이 만료되었습니다.");
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(" 토큰이 만료되었습니다.");
+//        }
+//
+//        System.out.println(" 토큰이 아직 유효합니다.");
+//        return ResponseEntity.ok("토큰이 아직 유효합니다.");
+//    }
 }
