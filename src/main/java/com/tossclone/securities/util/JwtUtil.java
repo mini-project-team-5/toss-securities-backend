@@ -50,6 +50,7 @@ public class JwtUtil {
             Map<String, Object> payload = objectMapper.readValue(payloadJson, Map.class);
 
             Long exp = payload.get("exp") != null ? ((Number) payload.get("exp")).longValue() : null;
+            System.out.println(System.currentTimeMillis() +" " +exp);
             if (exp == null) {
                 System.out.println("만료 시간 정보 없음! 토큰 만료로 처리됨.");
                 return true;

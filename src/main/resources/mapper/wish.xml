@@ -18,10 +18,8 @@
 	</resultMap>
 
 	<select id="getWishList" resultMap="WishResultMap"
-		parameterType="Long">
-		SELECT * FROM wish
-		WHERE
-		user_id = #{userId}
+		>
+		SELECT * FROM wish WHERE user_id = #{userId}
 	</select>
 
 	<insert id="addWish"
@@ -39,9 +37,8 @@
 
 	<delete id="deleteWish"
 		parameterType="com.tossclone.securities.dto.Wish">
-		DELETE FROM wish
-		WHERE user_id = #{userId} AND stock_code
-		= #{stockCode}
+		DELETE FROM wish WHERE user_id = #{userId} AND
+		stock_code = #{stockCode}
 	</delete>
 
 
