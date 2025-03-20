@@ -13,7 +13,7 @@ public class WishService {
 	@Autowired
 	WishDao wishDao;
 
-	public List<Wish> getWishList(int userId) throws Exception {
+	public List<Wish> getWishList(Long userId) throws Exception {
 		return wishDao.getWishList(userId);
 	}
 
@@ -21,7 +21,7 @@ public class WishService {
 		wishDao.addWish(wish);
 	}
 
-	public void deleteWish(int userId, String stockCode) throws Exception {
+	public void deleteWish(Long userId, String stockCode) throws Exception {
 		wishDao.deleteWish(userId, stockCode);
 	}
 
