@@ -64,7 +64,6 @@ public class OpenCrypt {
 		return ba;
 	}
 
-	// byte[] to hex
 	public static String byteArrayToHex(byte[] ba) {
 		if (ba == null || ba.length == 0) {
 			return null;
