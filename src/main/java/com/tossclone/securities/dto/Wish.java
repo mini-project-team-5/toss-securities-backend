@@ -1,14 +1,15 @@
 package com.tossclone.securities.dto;
 
 public class Wish {
-	private int wishId, userId;
+	private int wishId;
+	private Long userId;
 	private Stock stock;
 
 	public Wish() {
 		super();
 	}
 
-	public Wish(int wishId, int userId, Stock stock) {
+	public Wish(int wishId, Long userId, Stock stock) {
 		super();
 		this.wishId = wishId;
 		this.userId = userId;
@@ -23,11 +24,11 @@ public class Wish {
 		this.wishId = wishId;
 	}
 
-	public int getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
