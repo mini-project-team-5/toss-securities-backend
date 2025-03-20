@@ -18,12 +18,12 @@ public class KisController {
 	@Autowired
 	private KisService kisService;
 
-	@GetMapping("/volume-rank")
+	@GetMapping("/api/volume-rank")
 	public Mono<List<Stock>> getVolumeRank() {
 		return kisService.getVolumeRank();
 	}
 	
-	@GetMapping("/stock-quote/{stockCode}")
+	@GetMapping("/api/stock-quote/{stockCode}")
 	public Mono<StockQuote> getStockQuote(@PathVariable String stockCode) {
 		return kisService.getStockQuote(stockCode);
 	}
