@@ -4,6 +4,11 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.tossclone.securities.dao.CommunityDao">
+
+	<select id="getComment" parameterType="String" resultType="Comment">
+		SELECT * FROM comment where stock_code = #{stockCode}
+	</select>
+
 	<insert id="createComment"
 		parameterType="com.tossclone.securities.dto.Comment">
 		INSERT INTO comment (stock_code, user_id, user_name,
