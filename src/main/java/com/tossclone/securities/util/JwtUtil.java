@@ -6,14 +6,13 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-import java.util.Date;
 import java.util.Map;
 
 @Component
 public class JwtUtil {
     private static final String SECRET_KEY = "my-secret-key-for-jwt-token";
-//    private static final long EXPIRATION_TIME = 1000 * 60 * 30; // 30분
-    private static final long EXPIRATION_TIME = 60 * 1000; // 60초로 변경
+    private static final long EXPIRATION_TIME = 1000 * 60 * 30; // 30분
+//    private static final long EXPIRATION_TIME = 60 * 1000; // 60초로 변경
 
     public String generateToken(Long user_id) {  
         long now = System.currentTimeMillis();
