@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tossclone.securities.dao.CommunityDao">
+	<insert id="createComment"
+		parameterType="com.tossclone.securities.dto.Comment">
+		INSERT INTO comment (stock_code, user_id, user_name,
+		content)
+		VALUES (#{stockCode},
+		#{userId},
+		#{userName},
+		#{content}
+		)
+	</insert>
+</mapper>
