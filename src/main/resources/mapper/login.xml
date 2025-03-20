@@ -5,8 +5,8 @@
     <!-- 로그인 토큰 저장 -->
     <insert id="saveToken">
         INSERT INTO login_token (user_id, token, expire_time)
-        VALUES (#{user_id}, #{token}, DATE_ADD(NOW(), INTERVAL 1 MINUTE))
-        ON DUPLICATE KEY UPDATE token = #{token}, logintime = NOW(), expire_time = DATE_ADD(NOW(), INTERVAL 1 MINUTE);
+        VALUES (#{user_id}, #{token}, DATE_ADD(NOW(), INTERVAL 30 MINUTE))
+        ON DUPLICATE KEY UPDATE token = #{token}, logintime = NOW(), expire_time = DATE_ADD(NOW(), INTERVAL 30 MINUTE);
     </insert>
 
     <!-- 로그인 토큰 조회 -->

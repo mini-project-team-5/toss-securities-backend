@@ -10,12 +10,10 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseCookie;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import jakarta.validation.Valid;
 
-@CrossOrigin(origins = "http://localhost:3001", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
