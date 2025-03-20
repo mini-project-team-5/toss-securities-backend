@@ -20,7 +20,7 @@ public class WishController {
 	@Autowired
 	WishService wishService;
 
-	@GetMapping("/wish/{userId}")
+	@GetMapping("/api/wishlist")
 	public List<Wish> getWishList(@PathVariable int userId) {
 		try {
 			return wishService.getWishList(userId);
@@ -31,7 +31,7 @@ public class WishController {
 		}
 	}
 
-	@PostMapping("add-wish")
+	@PostMapping("/api/wishlist")
 	public String addWish(@RequestBody Wish wish) {
 		try {
 			wishService.addWish(wish);
@@ -43,7 +43,7 @@ public class WishController {
 		}
 	}
 
-	@DeleteMapping("/wish/{userId}/{stockCode}")
+	@DeleteMapping("/api/wishlist/{stockCode}")
 	public String deleteWish(@PathVariable int userId, @PathVariable String stockCode) {
 		try {
 			wishService.deleteWish(userId, stockCode);
