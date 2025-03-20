@@ -29,11 +29,16 @@ public class AuthService {
     }
 
     public void saveToken(Long user_id, String token) {
-        System.out.println("🔹 saveToken 실행됨 - user_id: " + user_id + ", token: " + token);
+        System.out.println("saveToken 실행됨 - user_id: " + user_id + ", token: " + token);
         loginDao.saveToken(user_id, token);
-        System.out.println("✅ saveToken 실행 완료!");
+        System.out.println("saveToken 실행 완료!");
     }
-
+    
+    public void deleteToken(Long user_id) {
+        System.out.println("deleteToken 실행 - user_id: " + user_id);
+        loginDao.deleteToken(user_id);
+        System.out.println("deleteToken 실행 완료!");
+    }
 
     public boolean isTokenValid(String token) {
 
