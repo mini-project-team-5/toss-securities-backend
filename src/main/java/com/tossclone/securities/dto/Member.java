@@ -3,7 +3,7 @@ package com.tossclone.securities.dto;
 import jakarta.validation.constraints.NotNull;
 
 public class Member {
-    private Long id;
+    private Long user_id;
 
     @NotNull(message = "이름을 입력해주세요!")
     private String name;
@@ -20,20 +20,20 @@ public class Member {
     public Member() {
     }
 
-    public Member(Long id, String name, String birth_date, String phone_number, String carrier) {
-        this.id = id;
+    public Member(Long user_id, String name, String birth_date, String phone_number, String carrier) {
+        this.user_id = user_id;
         this.name = name;
         this.birth_date = birth_date;
         this.phone_number = phone_number;
         this.carrier = carrier;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUser_id() {
+        return user_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
     }
 
     public String getName() {
