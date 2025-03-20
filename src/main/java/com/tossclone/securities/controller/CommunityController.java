@@ -31,52 +31,52 @@ public class CommunityController {
 
 	@Autowired
 	MemberService memberService;
-	
+
 	@Autowired
 	CommunityService communityService;
-	
-	@GetMapping
+
+	@GetMapping("/{stockCode}")
 	public ResponseEntity<List<Comment>> getComments(@PathVariable String stockCode) {
 		try {
-			List<Comment> comments = communityService.getComments(stockCode);
-			return ResponseEntity.ok(comments);
+			return ResponseEntity.ok(communityService.getComments(stockCode));
 		} catch (Exception e) {
-	        e.printStackTrace();
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-	    }
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
 	}
 
 	@PostMapping
 	public ResponseEntity<String> createComment(@RequestHeader("Authorization") String authorization,
-	        @RequestBody Comment comment) {
+			@RequestBody Comment comment) {
+		String token = authorization.substring(7);
 
-	    try {
-	        // 토큰 검증
-	        if (authorization == null || !authService.isTokenValid(authorization)) {
-	            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or expired token");
-	        }
+		try {
+			// 토큰 검증
+			if (token == null || !authService.isTokenValid(token)) {
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or expired token");
+			}
 
-	        // 토큰에서 userId 추출
-	        Long userId = jwtUtil.extractUserId(authorization);
+			// 토큰에서 userId 추출
+			Long userId = jwtUtil.extractUserId(authorization);
 
-	        // userId로 사용자 이름 조회
-	        String userName = memberService.getUserNameByUserId(userId);
+			// userId로 사용자 이름 조회
+			String userName = memberService.getUserNameByUserId(userId);
 
-	        // 댓글 작성 정보 설정
-	        comment.setUserId(userId);
-	        comment.setUserName(userName);
+			// 댓글 작성 정보 설정
+			comment.setUserId(userId);
+			comment.setUserName(userName);
 
-	        // 댓글 서비스 호출
-	        communityService.createComment(comment);
+			// 댓글 서비스 호출
+			communityService.createComment(comment);
 
-	        // 성공 응답 반환
-	        return ResponseEntity.status(HttpStatus.CREATED).body("Comment created successfully");
+			// 성공 응답 반환
+			return ResponseEntity.status(HttpStatus.CREATED).body("Comment created successfully");
 
-	    
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while creating the comment");
-	    }
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("An error occurred while creating the comment");
+		}
 	}
 
 }
