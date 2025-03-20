@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tossclone.securities.dao.SaltDao">
+
+    <!-- Salt 저장 -->
+    <insert id="saveSalt">
+        INSERT INTO login_salt (user_id, salt)
+        VALUES (#{userId}, #{salt})
+        ON DUPLICATE KEY UPDATE salt = #{salt};
+    </insert>
+
+    <!-- Salt 조회 -->
+    <select id="findSaltByUserId" resultType="String">
+        SELECT salt FROM login_salt WHERE user_id = #{userId}
+    </select>
+
+</mapper>
