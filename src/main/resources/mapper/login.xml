@@ -4,15 +4,14 @@
 
     <!-- 로그인 토큰 저장 -->
     <insert id="saveToken">
-        INSERT INTO login_token (user_id, token)
-        VALUES (#{userId}, #{token})
-        ON DUPLICATE KEY UPDATE token = #{token}, logintime = NOW();
+        INSERT INTO login_token (user_id, token, expire_time)
+        VALUES (#{user_id}, #{token}, DATE_ADD(NOW(), INTERVAL 1 MINUTE))
+        ON DUPLICATE KEY UPDATE token = #{token}, logintime = NOW(), expire_time = DATE_ADD(NOW(), INTERVAL 1 MINUTE);
     </insert>
 
     <!-- 로그인 토큰 조회 -->
-	<select id="findTokenByUserId" parameterType="long" resultType="com.tossclone.securities.dto.LoginToken">
-	    SELECT * FROM login_token WHERE user_id = #{userId}
-	</select>
-
+    <select id="findTokenByUserId" parameterType="long" resultType="java.lang.String">
+        SELECT token FROM login_token WHERE user_id = #{user_id};
+    </select>
 
 </mapper>

@@ -4,9 +4,10 @@ import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface LoginDao {
-    @Insert("INSERT INTO login_token (user_id, token) VALUES (#{userId}, #{token}) ON DUPLICATE KEY UPDATE token = #{token}, logintime = NOW()")
-    void saveToken(@Param("userId") String userId, @Param("token") String token);
+    @Insert("INSERT INTO login_token (user_id, token, expire_time) VALUES (#{user_id}, #{token}, DATE_ADD(NOW(), INTERVAL 1 MINUTE)) " +
+            "ON DUPLICATE KEY UPDATE token = #{token}, logintime = NOW(), expire_time = DATE_ADD(NOW(), INTERVAL 1 MINUTE)")
+    void saveToken(@Param("user_id") Long user_id, @Param("token") String token);
 
-    @Select("SELECT token FROM login_token WHERE user_id = #{userId}")
-    String findTokenByUserId(@Param("userId") String userId);
+    @Select("SELECT token FROM login_token WHERE user_id = #{user_id}")
+    String findTokenByUserId(@Param("user_id") Long user_id);
 }

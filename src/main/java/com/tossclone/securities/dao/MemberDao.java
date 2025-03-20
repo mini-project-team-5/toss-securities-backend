@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.*;
 @Mapper
 public interface MemberDao {
     @Insert("INSERT INTO members (name, birth_date, phone_number, carrier) VALUES (#{name}, #{birth_date}, #{phone_number}, #{carrier})")
+    @Options(useGeneratedKeys = true, keyProperty = "user_id")
     void register(Member member);
 
     @Select("SELECT * FROM members WHERE name = #{name} AND phone_number = #{phone_number} AND SUBSTRING(birth_date, 1, 6) = #{birth_date}")
