@@ -19,9 +19,6 @@ import com.tossclone.securities.service.AuthService;
 import com.tossclone.securities.service.WishService;
 import com.tossclone.securities.util.JwtUtil;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-
 @RestController
 @CrossOrigin("http://127.0.0.1:5500/")
 public class WishController {
@@ -43,7 +40,7 @@ public class WishController {
 	        }
 
 	        // 토큰에서 userId 추출
-	        Long userId = Long.parseLong(jwtUtil.extractUserId(authorization));
+	        Long userId = jwtUtil.extractUserId(authorization);
 	        
 	        return ResponseEntity.ok(wishService.getWishList(userId));
 	    
@@ -60,7 +57,7 @@ public class WishController {
 	            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
 	        }
 
-	        Long userId = Long.parseLong(jwtUtil.extractUserId(authorization));
+	        Long userId =jwtUtil.extractUserId(authorization);
 	        wish.setUserId(userId); 
 
 	        wishService.addWish(wish);
@@ -79,7 +76,7 @@ public class WishController {
 	            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
 	        }
 
-	        Long userId = Long.parseLong(jwtUtil.extractUserId(authorization));
+	        Long userId =jwtUtil.extractUserId(authorization);
 
 	        wishService.deleteWish(userId, stockCode);
 	        return ResponseEntity.ok("ok");

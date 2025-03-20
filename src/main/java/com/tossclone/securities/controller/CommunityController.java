@@ -57,7 +57,7 @@ public class CommunityController {
 	        }
 
 	        // 토큰에서 userId 추출
-	        Long userId = Long.parseLong(jwtUtil.extractUserId(authorization));
+	        Long userId = jwtUtil.extractUserId(authorization);
 
 	        // userId로 사용자 이름 조회
 	        String userName = memberService.getUserNameByUserId(userId);
