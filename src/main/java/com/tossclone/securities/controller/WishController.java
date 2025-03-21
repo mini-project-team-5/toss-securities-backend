@@ -42,7 +42,6 @@ public class WishController {
 
 	        // 토큰에서 userId 추출
 	        Long userId = jwtUtil.extractUserId(token);
-	       System.out.println(userId);
 	        
 	        return ResponseEntity.ok(wishService.getWishList(userId));
 	    
